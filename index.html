@@ -4,88 +4,96 @@
   <meta charset="UTF-8">
   <title>MODERN 11/10/2025</title>
   <style>
+    /* --- RESET VÀ NỀN --- */
     body {
-      h2 {
-  font-size: 50px; /* tiêu đề chính to */
-  margin-bottom: 0px; /* khoảng cách dưới tiêu đề 
-}
-
-p {
-  font-size: 18px; /* đoạn chữ nhỏ hơn tí */
-  margin: 0px 0; /* khoảng cách trên-dưới đều nhau */
-}
-
-input {
-  font-size: 18px; /* chữ trong ô nhập to hơn */
-}
-
-button {
-  font-size: 25px; /* chữ trên nút bấm to hơn */
-}
-
-h3 {
-  font-size: 30px; /* tiêu đề QR */
-}
-
-  background:
+      background:
         linear-gradient(rgba(243, 243, 243, 0.7), rgba(243, 243, 243, 0.7)),
         url("unnamed.png") no-repeat center center fixed;
-  background-size: cover;
-  background-position: center 18%; /* 🔹 canh giữa cả chiều ngang & dọc */
-  font-family: "Poppins", sans-serif;
-  text-align: center;
-  padding: 0px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh; /* toàn chiều cao màn hình */
-}
+      background-size: cover;
+      background-position: center 18%;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* --- CHỮ --- */
+    h2 {
+      font-size: 50px;
+      margin-bottom: 0;
+      color: rgb(160, 61, 8);
+    }
+
+    p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 30px;
+      margin-top: 10px;
+      color: rgb(160, 61, 8);
+    }
+
+    /* --- FORM --- */
     .form-container {
-  display: flex;
-  flex-direction: column; /* cho nút nằm dưới ô email */
-  align-items: center;
-  gap: 10px;
-  margin-top: 15px;
-}
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
 
-input {
-  padding: 10px;
-  width: 250px;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-  outline: none;
-  margin-top: 15px;
-  color: black; /* chữ trong ô màu đen */
-  text-align: center;
-}
+    input {
+      font-size: 18px;
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      outline: none;
+      margin-top: 15px;
+      color: black;
+      text-align: center;
+    }
 
-input::placeholder {
-  color: #999; /* placeholder màu xám nhạt */
-}
+    input::placeholder {
+      color: #999;
+    }
 
-button {
-  padding: 10px 20px;
-  background: rgb(160, 61, 8); /* đỏ đậm */
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* 🔹 tạo hiệu ứng nổi khối */
-  transition: all 0.3s ease;
-}
-
-button:hover {
+    button {
+      font-size: 25px;
+      padding: 10px 20px;
       background: rgb(160, 61, 8);
-  transform: scale(1.05);
-}
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
 
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    /* --- QR SECTION --- */
     #qrSection {
       margin-top: 40px;
-      display: none;
+      min-height: 260px; /* Giữ chỗ sẵn để không bị đẩy bố cục */
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
+
+    #qrSection.show {
+      opacity: 1;
+    }
+
     #qrImage {
       width: 220px;
       height: 220px;
@@ -93,27 +101,29 @@ button:hover {
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
+
     #error {
-      color:rgb(160, 61, 8) ;
+      color: rgb(160, 61, 8);
       font-weight: 600;
       margin-top: 10px;
     }
   </style>
 </head>
-<meta charset="UTF-8">
 <body>
-  <h2 style="color:rgb(160, 61, 8)">WEANIE - FC WEAN</h2>
+  <h2>WEANIE - FC WEAN</h2>
   <p>NHẬP EMAIL ĐỂ NHẬN VÉ CHECK-IN</p>
+
   <div class="form-container">
-  <input type="email" id="emailInput" placeholder="VUI LÒNG NHẬP EMAIL">
-  <button onclick="checkEmail()">NHẬN VÉ</button>
-</div>
+    <input type="email" id="emailInput" placeholder="VUI LÒNG NHẬP EMAIL">
+    <button onclick="checkEmail()">NHẬN VÉ</button>
+  </div>
+
   <p id="error"></p>
+
   <div id="qrSection">
     <h3>QR CHECK-IN CỦA BẠN:</h3>
     <img id="qrImage" src="" alt="QR Check-in">
   </div>
-
   <script>
     // Danh s ch email v  QR tuong ?ng
     const emailToQR = {
@@ -364,6 +374,7 @@ button:hover {
   </script>
 </body>
 </html>
+
 
 
 
