@@ -4,96 +4,41 @@
   <meta charset="UTF-8">
   <title>MODERN 11/10/2025</title>
   <style>
-    /* --- RESET VÀ NỀN --- */
     body {
-      background:
+  background:
         linear-gradient(rgba(243, 243, 243, 0.7), rgba(243, 243, 243, 0.7)),
         url("unnamed.png") no-repeat center center fixed;
-      background-size: cover;
-      background-position: center 18%;
-      font-family: "Poppins", sans-serif;
-      text-align: center;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    /* --- CHỮ --- */
-    h2 {
-      font-size: 50px;
-      margin-bottom: 0;
-      color: rgb(160, 61, 8);
-    }
-
-    p {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    h3 {
-      font-size: 30px;
-      margin-top: 10px;
-      color: rgb(160, 61, 8);
-    }
-
-    /* --- FORM --- */
-    .form-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
+  background-size: cover;
+  background-position: center 18%; /* 🔹 canh giữa cả chiều ngang & dọc */
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  padding: 0px;
+  margin: 0;
+}
     input {
-      font-size: 18px;
       padding: 10px;
       width: 250px;
       border-radius: 8px;
       border: 1px solid #aaa;
       outline: none;
       margin-top: 15px;
-      color: black;
-      text-align: center;
     }
-
-    input::placeholder {
-      color: #999;
-    }
-
     button {
-      font-size: 25px;
       padding: 10px 20px;
       background: rgb(160, 61, 8);
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 10px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
+      margin-top: 15px;
     }
-
     button:hover {
-      transform: scale(1.05);
+      background: #444;
     }
-
-    /* --- QR SECTION --- */
     #qrSection {
-      margin-top: 40px;
-      min-height: 260px; /* Giữ chỗ sẵn để không bị đẩy bố cục */
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      margin-top: 30px;
+      display: none;
     }
-
-    #qrSection.show {
-      opacity: 1;
-    }
-
     #qrImage {
       width: 220px;
       height: 220px;
@@ -101,29 +46,26 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
     #error {
-      color: rgb(160, 61, 8);
+      color: red;
       font-weight: 600;
       margin-top: 10px;
     }
   </style>
 </head>
+<meta charset="UTF-8">
 <body>
   <h2>WEANIE - FC WEAN</h2>
   <p>NHẬP EMAIL ĐỂ NHẬN VÉ CHECK-IN</p>
-
-  <div class="form-container">
-    <input type="email" id="emailInput" placeholder="VUI LÒNG NHẬP EMAIL">
-    <button onclick="checkEmail()">NHẬN VÉ</button>
-  </div>
-
+  <input type="email" id="emailInput" placeholder="VUI LÒNG NHẬP EMAIL">
+  <br>
+  <button onclick="checkEmail()">NHẬN VÉ</button>
   <p id="error"></p>
-
   <div id="qrSection">
     <h3>QR CHECK-IN CỦA BẠN:</h3>
     <img id="qrImage" src="" alt="QR Check-in">
   </div>
+
   <script>
     // Danh s ch email v  QR tuong ?ng
     const emailToQR = {
@@ -361,8 +303,7 @@
 
       if (emailToQR[emailInput]) {
         // N?u email d ng
-        const qrList = emailToQR[emailInput];
-        qrImage.src = "./" + emailToQR[emailInput];
+        qrImage.src = "album/" + emailToQR[emailInput];
         qrSection.style.display = "block";
         errorText.textContent = "";
       } else {
@@ -374,30 +315,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
