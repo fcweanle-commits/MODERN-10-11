@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>MODERN 11/10/2025</title>
+  <style>
+    body {
+      background: #f3f3f3;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    h2 {
+      color: rgb(160, 61, 8);
+    }
+    input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      outline: none;
+      margin-top: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background: rgb(160, 61, 8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #444;
+    }
+    #qrSection {
+      margin-top: 30px;
+      display: none;
+    }
+    #qrImage {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #error {
+      color: red;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<meta charset="UTF-8">
+<body>
+  <h2>WEANIE - FC WEAN</h2>
+  <p>NHẬP EMAIL ĐỂ NHẬN VÉ CHECK-IN</p>
+  <input type="email" id="emailInput" placeholder="VUI LÒNG NHẬP EMAIL">
+  <br>
+  <button onclick="checkEmail()">NHẬN VÉ</button>
+  <p id="error"></p>
+  <div id="qrSection">
+    <h3>QR CHECK-IN CỦA BẠN:</h3>
+    <img id="qrImage" src="" alt="QR Check-in">
+  </div>
+
+  <script>
+    // Danh s ch email v  QR tuong ?ng
+    const emailToQR = {
+      "trinhthe19072001@gmail.com": "FANCLUB-WEAN_002.png", 
+      "luuthuyhangdta2@gmail.com": "FANCLUB-WEAN_003.png",
+      "thanhnhien30121995@gmail.com": "FANCLUB-WEAN_004.png",
+      "thienmii82@gmail.com": "FANCLUB-WEAN_005.png",
+      "lehuutrongtin290702@gmail.com": "FANCLUB-WEAN_006.png",
+      "nguyenhahoailinh@gmail.com": "FANCLUB-WEAN_007.png",
+      "demo92141@gmail.com": "FANCLUB-WEAN_008.png",
+      "utthanh.0110@gmail.com": "FANCLUB-WEAN_009.png",
+      "nguyenhoanglong21081995@gmail.com": "FANCLUB-WEAN_010.png",
+      "nhithanh5794@gmail.com": "FANCLUB-WEAN_011.png",
+      "nthan.0401@gmail.com": "FANCLUB-WEAN_012.png",
+      "longquyen6622@gmail.com": "FANCLUB-WEAN_013.png",
+      "baohan040508@gmail.com": "FANCLUB-WEAN_014.png",
+      "dinhyennhi1002@gmail.com": "FANCLUB-WEAN_015.png",
+      "huehuenguyenminh28062007@gmail.com": "FANCLUB-WEAN_016.png",
+      "dhtuongvi123@gmail.com": "FANCLUB-WEAN_017.png",
+      "tr.htrinh01@gmail.com": "FANCLUB-WEAN_018.png",
+      "thuyngan09121001@gmail.com": "FANCLUB-WEAN_019.png",
+      "luuthuyhangdta2@gmail.com": "FANCLUB-WEAN_020.png",
+      "vann.cloud04@gmail.com": "FANCLUB-WEAN_021.png",
+      "baoanhtran29122007@gmail.com": "FANCLUB-WEAN_022.png",
+      "anhthub631@gmail.com": "FANCLUB-WEAN_023.png",
+      "tranphamnhungoc2001@gmail.com": "FANCLUB-WEAN_024.png",
+      "callmewynn204@gmail.com": "FANCLUB-WEAN_025.png",
+      "quachthuw.2003@gmail.com": "FANCLUB-WEAN_026.png",
+      "lethithaosuong20@gmail.com": "FANCLUB-WEAN_027.png",
+      "thtuyen1605@gmail.com": "FANCLUB-WEAN_028.png",
+      "nguyenanhthu18190809@gmail.com": "FANCLUB-WEAN_029.png",
+      "baohan040508@gmail.com": "FANCLUB-WEAN_030.png",
+      "nhuyh229@gmail.com": "FANCLUB-WEAN_031.png",
+      "nguyetnhi8125@gmail.com": "FANCLUB-WEAN_032.png",
+      "uienmi7301@gmail.com": "FANCLUB-WEAN_033.png",
+      "ngann2344@gmail.com": "FANCLUB-WEAN_034.png",
+      "nguyenhlannhi8910@gmail.com": "FANCLUB-WEAN_035.png",
+      "dothiminhthu.33923@gmail.com": "FANCLUB-WEAN_036.png",
+      "hamindayyy@gmail.com": "FANCLUB-WEAN_037.png",
+      "kimm34757@gmail.com": "FANCLUB-WEAN_038.png",
+      "nnguyenngocy217@gmail.com": "FANCLUB-WEAN_039.png",
+      "nguyennhubinh2410@gmail.com": "FANCLUB-WEAN_040.png",
+      "noc057179@gmail.com": "FANCLUB-WEAN_041.png",
+      "phamthaovy2312@gmail.com": "FANCLUB-WEAN_042.png",
+      "lananhvongoc12@gmail.com": "FANCLUB-WEAN_043.png",
+      "danghongtien.230404@gmail.com": "FANCLUB-WEAN_044.png",
+      "hoangnhi0148@gmail.com": "FANCLUB-WEAN_045.png",
+      "anhduongnhat051@gmail.com": "FANCLUB-WEAN_046.png",
+      "dothihoaan.0910@gmail.com": "FANCLUB-WEAN_047.png",
+      "ngocdiepnehihi@gmail.com": "FANCLUB-WEAN_048.png",
+      "taehyung1113012@gmail.com": "FANCLUB-WEAN_049.png",
+      "ngocmainguyenhoang25@gmail.com": "FANCLUB-WEAN_050.png",
+      "trahh.hr@gmail.com": "FANCLUB-WEAN_051.png",
+      "hanhhlinhtg@gmail.com": "FANCLUB-WEAN_052.png",
+      "nbttin21.16@gmail.com": "FANCLUB-WEAN_053.png",
+      "pnhphuong2702@gmail.com": "FANCLUB-WEAN_054.png",
+      "anhthu.pham9798@gmail.com": "FANCLUB-WEAN_055.png",
+      "nguyentrinhhaiphuong@gmail.com": "FANCLUB-WEAN_056.png",
+      "nairie1702@gmail.com": "FANCLUB-WEAN_057.png",
+      "hoanhvu2308@gmail.com": "FANCLUB-WEAN_058.png",
+      "diemni95@gmail.com": "FANCLUB-WEAN_059.png",
+      "vmkhue2103@gmail.com": "FANCLUB-WEAN_060.png",
+      "hamindayyy@gmail.com": "FANCLUB-WEAN_061.png",
+      "hanlunar0101@gmail.com": "FANCLUB-WEAN_062.png",
+      "hahue1006@gmail.com": "FANCLUB-WEAN_063.png",
+      "chubaohan2001@gmail.com": "FANCLUB-WEAN_064.png",
+      "tranphamanhthutvt@gmail.com": "FANCLUB-WEAN_065.png",
+      "13nguyenhoanglong@gmail.com": "FANCLUB-WEAN_066.png",
+      "thuyduong160504@gmail.com": "FANCLUB-WEAN_067.png",
+      "tranboihan3105@gmail.com": "FANCLUB-WEAN_068.png",
+      "baoanhtran29122007@gmail.com": "FANCLUB-WEAN_069.png",
+      "h7a710@gmail.com": "FANCLUB-WEAN_070.png",
+      "vothanhtuyen16088@gmail.com": "FANCLUB-WEAN_071.png",
+      "nghiemngan174@gmail.com": "FANCLUB-WEAN_072.png",
+      "taolaqn04@gmail.com": "FANCLUB-WEAN_073.png",
+      "toyusima2408@gmail.com": "FANCLUB-WEAN_074.png",
+      "nnamphuong2008@gmail.com": "FANCLUB-WEAN_075.png",
+      "pnqhuong0506@gmail.com": "FANCLUB-WEAN_076.png",
+      "hannguyen17037@gmail.com": "FANCLUB-WEAN_077.png",
+      "nttn040620@gmail.com": "FANCLUB-WEAN_078.png",
+      "minm75904@gmail.com": "FANCLUB-WEAN_079.png",
+      "chubaohuyen@gmail.com": "FANCLUB-WEAN_080.png",
+      "phamkhanhngoc0305@gmail.com": "FANCLUB-WEAN_081.png",
+      "nguyenlebaovy347@gmail.com": "FANCLUB-WEAN_082.png",
+      "thimynhu1502@gmail.com": "FANCLUB-WEAN_083.png",
+      "nguyenthuy01692607764@gmail.com": "FANCLUB-WEAN_084.png",
+      "huynhtanphat150705@gmail.com": "FANCLUB-WEAN_085.png",
+      "realyoo24@gmail.com": "FANCLUB-WEAN_086.png",
+      "thanhthuyps16060@gmail.com": "FANCLUB-WEAN_087.png",
+      "maimyngph@gmail.com": "FANCLUB-WEAN_088.png",
+      "nhuy923.02@gmail.com": "FANCLUB-WEAN_089.png",
+      "tontuthi310707@gmail.com": "FANCLUB-WEAN_090.png",
+      "nguyenthuy01692607764@gmail.com": "FANCLUB-WEAN_091.png",
+      "hvan21818@gmail.com": "FANCLUB-WEAN_092.png",
+      "uyennguyenthaimy@gmail.com": "FANCLUB-WEAN_093.png",
+      "mytruong217@gmail.com": "FANCLUB-WEAN_094.png",
+      "anngoctuyetnhi@gmail.com": "FANCLUB-WEAN_095.png",
+      "nguyennguyenthy2007@gmail.com": "FANCLUB-WEAN_096.png",
+      "nhquynh4036@gmail.com": "FANCLUB-WEAN_097.png",
+      "ngochuynhmaitrac@gmail.com": "FANCLUB-WEAN_098.png",
+      "tamph2802@gmail.com": "FANCLUB-WEAN_099.png",
+      "vihuynh116@gmail.com": "FANCLUB-WEAN_100.png",
+      "nguyenthanhthaost0101@gmail.com": "FANCLUB-WEAN_101.png",
+      "vtnminh04062003@gmail.com": "FANCLUB-WEAN_102.png",
+      "alafa789@gmail.com": "FANCLUB-WEAN_103.png",
+      "pnainhu173@gmail.com": "FANCLUB-WEAN_104.png",
+      "buiquocbao.95.nvt@gmail.com": "FANCLUB-WEAN_105.png",
+      "linhngockhanh.work@gmail.com": "FANCLUB-WEAN_106.png",
+      "vothiminhthu09102006@gmail.com": "FANCLUB-WEAN_107.png",
+      "nhu192055@gmail.com": "FANCLUB-WEAN_108.png",
+      "annaluong273@gmail.com": "FANCLUB-WEAN_109.png",
+      "nguyenngocngoc248@gmail.com": "FANCLUB-WEAN_110.png",
+      "tuhue.phanmai@gmail.com": "FANCLUB-WEAN_111.png",
+      "buithitrangnhung2000@gmail.com": "FANCLUB-WEAN_112.png",
+      "yennhung271007@gmail.com": "FANCLUB-WEAN_113.png",
+      "hoangyenvi94@gmail.com": "FANCLUB-WEAN_114.png",
+      "phuonglinhqv030205@gmail.com": "FANCLUB-WEAN_115.png",
+      "ngdoanphuongha@gmail.com": "FANCLUB-WEAN_116.png",
+      "abovyy@gmail.com": "FANCLUB-WEAN_117.png",
+      "khanhphuong200020@gmail.com": "FANCLUB-WEAN_118.png",
+      "daothu250605@gmail.com": "FANCLUB-WEAN_119.png",
+      "minhthunguyen270207@gmail.com": "FANCLUB-WEAN_120.png",
+      "h.ngannnn.06@gmail.com": "FANCLUB-WEAN_121.png",
+      "linhnguyenvtd@gmail.com": "FANCLUB-WEAN_122.png",
+      "van122nvc@gmail.com": "FANCLUB-WEAN_123.png",
+      "thtrucng30@gmail.com": "FANCLUB-WEAN_124.png",
+      "minhanhnguyen277@gmail.com": "FANCLUB-WEAN_125.png",
+      "jkay1702@gmail.com": "FANCLUB-WEAN_126.png",
+      "hnbnhu061107@gmail.com": "FANCLUB-WEAN_127.png",
+      "hotrananhkhoa22@gmail.com": "FANCLUB-WEAN_128.png",
+      "nganhtu1310@gmail.com": "FANCLUB-WEAN_129.png",
+      "minhkhue6507@gmail.com": "FANCLUB-WEAN_130.png",
+      "nle225247@gmail.com": "FANCLUB-WEAN_131.png",
+      "hznhien@gmail.com": "FANCLUB-WEAN_132.png",
+      "vynt020612@gmail.com": "FANCLUB-WEAN_133.png",
+      "nguyenvuquynhanh249@gmail.com": "FANCLUB-WEAN_134.png",
+      "phuonglinh9112k7@gmail.com": "FANCLUB-WEAN_135.png",
+      "khanhhien374@gmail.com": "FANCLUB-WEAN_136.png",
+      "daohuynhhannhien@gmail.com": "FANCLUB-WEAN_137.png",
+      "vinguyen16032005kg@gmail.com": "FANCLUB-WEAN_138.png",
+      "phamquynhnhu15022004@gmail.com": "FANCLUB-WEAN_139.png",
+      "khoahuynhnguyendang12@gmail.com": "FANCLUB-WEAN_140.png",
+      "giahantranle2306@gmail.com": "FANCLUB-WEAN_141.png",
+      "thanhthuy072003@gmail.com": "FANCLUB-WEAN_142.png",
+      "thutampq1110@gmail.com": "FANCLUB-WEAN_143.png",
+      "myquyenvo02@gmail.com": "FANCLUB-WEAN_144.png",
+      "ngoctram.3008@gmail.com": "FANCLUB-WEAN_145.png",
+      "vna1726@gmail.com": "FANCLUB-WEAN_146.png",
+      "dangthientai1309@gmail.com": "FANCLUB-WEAN_147.png",
+      "vutmyduye@gmail.com": "FANCLUB-WEAN_148.png",
+      "lenhuhuynh127@gmail.com": "FANCLUB-WEAN_149.png",
+      "mphamnguyen812@gmail.com": "FANCLUB-WEAN_150.png",
+      "vanthanhqn5@gmail.com": "FANCLUB-WEAN_151.png",
+      "tramanh130265@gmail.com": "FANCLUB-WEAN_152.png",
+      "vutmyduye@gmail.com": "FANCLUB-WEAN_153.png",
+      "unjidee@gmail.com": "FANCLUB-WEAN_154.png",
+      "hoanthai204@gmail.com": "FANCLUB-WEAN_155.png",
+      "riviueverything@gmail.com": "FANCLUB-WEAN_156.png",
+      "thmthu28@gmail.com": "FANCLUB-WEAN_157.png",
+      "phuocquynguyen0711@gmail.com": "FANCLUB-WEAN_158.png",
+      "khanhngan140507@gmail.com": "FANCLUB-WEAN_159.png",
+      "kieulan086@gmail.com": "FANCLUB-WEAN_160.png",
+      "nguyenthanhthuyvy2023@gmail.com": "FANCLUB-WEAN_161.png",
+      "dolengangiang8998@gmail.con": "FANCLUB-WEAN_162.png",
+      "quynh281701@gmail.com": "FANCLUB-WEAN_163.png",
+      "ngothihongtho0911@gmail.com": "FANCLUB-WEAN_164.png",
+      "tvan201207@gmail.com": "FANCLUB-WEAN_165.png",
+      "dnhi141079@gmail.com": "FANCLUB-WEAN_166.png",
+      "nhattranhd1800818.dlsg@gmail.com": "FANCLUB-WEAN_167.png",
+      "lamvinhthuan851@gmail.com": "FANCLUB-WEAN_168.png",
+      "thanhlam952022@gmail.com": "FANCLUB-WEAN_169.png",
+      "ngocanh921645@gmail.com": "FANCLUB-WEAN_170.png",
+      "hienzaqw@gmail.com": "FANCLUB-WEAN_171.png",
+      "ngoccanhh231@gmail.com": "FANCLUB-WEAN_172.png",
+      "ngoccanhh241@gmail.com": "FANCLUB-WEAN_173.png",
+      "tuankiet13820@gmail.com": "FANCLUB-WEAN_174.png",
+      "taetaeziezie@gmail.com": "FANCLUB-WEAN_175.png",
+      "vuthachthao20052003@gmail.com": "FANCLUB-WEAN_176.png",
+      "phamleyennhi05@gmail.com": "FANCLUB-WEAN_177.png",
+      "giaan3101thd@gmail.com": "FANCLUB-WEAN_178.png",
+      "nguyenhuybeo345@gmail.com": "FANCLUB-WEAN_179.png",
+      "anhanh180899@gmail.com": "FANCLUB-WEAN_180.png",
+      "vananhhua1907@gmail.com": "FANCLUB-WEAN_181.png",
+      "vpthuytien.381@gmail.com": "FANCLUB-WEAN_182.png",
+      "phamkhanhduyen220@gmail.com": "FANCLUB-WEAN_183.png",
+      "vnyen1509@gmail.com": "FANCLUB-WEAN_184.png",
+      "doanluu060@gmail.com": "FANCLUB-WEAN_185.png",
+      "nhbb097@gmail.com": "FANCLUB-WEAN_186.png",
+      "yen0378851064@gmail.com": "FANCLUB-WEAN_187.png",
+      "thaoongnn@gmail.com": "FANCLUB-WEAN_188.png",
+      "hangoctrinh.030303@gmail.com": "FANCLUB-WEAN_189.png",
+      "dtngoctuyen2135@gmail.com": "FANCLUB-WEAN_190.png",
+      "nthidieulinh39@gmail.com": "FANCLUB-WEAN_191.png",
+      "thanhthaodmx2022@gmail.com": "FANCLUB-WEAN_192.png",
+      "qhoa79897@gmail.com": "FANCLUB-WEAN_193.png",
+      "dophuong1109@gmail.com": "FANCLUB-WEAN_194.png",
+      "quynhquynh9811@gmail.com": "FANCLUB-WEAN_195.png",
+      "nguyenhuynhminhtri78.38@gmail.com": "FANCLUB-WEAN_196.png",
+      "tmxuan02@gmail.com": "FANCLUB-WEAN_197.png",
+      "hoangductai1994a@gmail.com": "FANCLUB-WEAN_198.png",
+      "trinhtunguyen025@gmail.com": "FANCLUB-WEAN_199.png",
+      "trannhatphuong3105@gmail.com": "FANCLUB-WEAN_200.png",
+      "minhnguyet.work7101@gmail.com": "FANCLUB-WEAN_201.png",
+      "trannhatphuong3105@gmail.com": "FANCLUB-WEAN_202.png",
+      "minhnguyet.work7101@gmail.com": "FANCLUB-WEAN_203.png",
+      "thuyvyhuynh1037@gmail.com": "FANCLUB-WEAN_204.png",
+      "doantrangngocpham@gmail.com": "FANCLUB-WEAN_205.png",
+      "kimphuong2462003@gmail.com": "FANCLUB-WEAN_206.png",
+      "thil20021@gmail.com": "FANCLUB-WEAN_207.png",
+      "tranhongdy567@gmail.com": "FANCLUB-WEAN_208.png",
+      "nguyenquynhchi28119@gmail.com": "FANCLUB-WEAN_209.png",
+      "zjn0907@gmail.com": "FANCLUB-WEAN_210.png",
+      "pinthanhtien57@gmail.com": "FANCLUB-WEAN_211.png",
+      "hoangngan8816@gmail.com": "FANCLUB-WEAN_212.png",
+      "lequochuy2662@gmail.com": "FANCLUB-WEAN_213.png",
+      "ntanthanh833@gmail.com": "FANCLUB-WEAN_214.png",
+      "tranhangoc2007@gmail.com": "FANCLUB-WEAN_215.png",
+      "quantranduy777@gmail.com": "FANCLUB-WEAN_216.png",
+      "minhthuho212006@gmail.com": "FANCLUB-WEAN_217.png",
+      "sq281200@gmail.com": "FANCLUB-WEAN_218.png",
+      "somewhereinsaigonbymyphone@gmail.com": "FANCLUB-WEAN_219.png",
+      "huynhnguyenkimngan207@gmail.com": "FANCLUB-WEAN_220.png",
+      "cambinh676@gmail.com": "FANCLUB-WEAN_221.png",
+
+
+
+
+    };
+
+    function checkEmail() {
+      const emailInput = document.getElementById("emailInput").value.trim().toLowerCase();
+      const qrSection = document.getElementById("qrSection");
+      const qrImage = document.getElementById("qrImage");
+      const errorText = document.getElementById("error");
+
+      if (emailToQR[emailInput]) {
+        // N?u email d ng
+        qrImage.src = "album/" + emailToQR[emailInput];
+        qrSection.style.display = "block";
+        errorText.textContent = "";
+      } else {
+        // N?u email sai
+        qrSection.style.display = "none";
+        errorText.textContent = "EMAIL KHÔNG HỢP LỆ VUI LÒNG NHẬP LẠI";
+      }
+    }
+  </script>
+</body>
+</html>
