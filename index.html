@@ -65,17 +65,19 @@ input::placeholder {
 button {
   padding: 10px 20px;
   background: color: rgb(160, 61, 8); /* đỏ đậm */
-  color: black;
+  color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
   font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* 🔹 tạo hiệu ứng nổi khối */
   transition: all 0.3s ease;
 }
 
 button:hover {
       background: #ff3b3b;
+  transform: scale(1.05);
 }
 
     #qrSection {
@@ -360,6 +362,7 @@ button:hover {
   </script>
 </body>
 </html>
+
 
 
 
