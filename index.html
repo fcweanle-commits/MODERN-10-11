@@ -303,7 +303,7 @@
 
       if (emailToQR[emailInput]) {
         // N?u email d ng
-        qrImage.src = "album/" + emailToQR[emailInput];
+        const qrList = emailToQR[emailInput];
         qrSection.style.display = "block";
         errorText.textContent = "";
       } else {
@@ -315,3 +315,4 @@
   </script>
 </body>
 </html>
+
