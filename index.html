@@ -30,7 +30,6 @@
     }
     button {
       padding: 10px 20px;
-      background: rgb(160, 61, 8);
       color: white;
       border: none;
       border-radius: 8px;
@@ -62,9 +61,10 @@
 <body>
   <h2 style="color:rgb(160, 61, 8)">WEANIE - FC WEAN</h2>
   <p>NHẬP EMAIL ĐỂ NHẬN VÉ CHECK-IN</p>
+  <div class="form-container">
   <input type="email" id="emailInput" placeholder="VUI LÒNG NHẬP EMAIL">
-  <br>
   <button onclick="checkEmail()">NHẬN VÉ</button>
+</div>
   <p id="error"></p>
   <div id="qrSection">
     <h3>QR CHECK-IN CỦA BẠN:</h3>
@@ -321,6 +321,7 @@
   </script>
 </body>
 </html>
+
 
 
 
