@@ -14,23 +14,7 @@
   text-align: center;
   padding: 0px;
   margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-    }
-
-    .container {
-      background: rgba(255, 255, 255, 0); /* nếu muốn thêm nền mờ có thể đổi */
-      padding: 20px;
-      border-radius: 10px;
-     
-  
 }
-    h2 {
-      color: rgb(160, 61, 8);
-    }
     input {
       padding: 10px;
       width: 250px;
@@ -319,7 +303,7 @@
 
       if (emailToQR[emailInput]) {
         // N?u email d ng
-        qrImage.src = emailToQR[emailInput];
+        qrImage.src = "album/" + emailToQR[emailInput];
         qrSection.style.display = "block";
         errorText.textContent = "";
       } else {
@@ -331,12 +315,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
